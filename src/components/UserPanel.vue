@@ -26,8 +26,14 @@ export default {
 
 <style>
 .box-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
   border: 1px solid grey;
   padding: 20px;
-  min-width: 30%;
+  box-sizing: border-box;
+  height: 30vw;
+  width: 30vw;
 }
 </style>
