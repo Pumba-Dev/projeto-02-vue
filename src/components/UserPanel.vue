@@ -1,8 +1,6 @@
 <template>
   <div class="box-container">
-    <h1 v-if="Object.keys(this.currentUser).length === 0">
-      No User Selected!!
-    </h1>
+    <h1 v-if="currentUser == null">No User Selected!!</h1>
     <template v-else>
       <h1>ID: {{ currentUser.id }}</h1>
       <h1>Name: {{ currentUser.userName }}</h1>
@@ -12,16 +10,19 @@
 </template>
 
 <script>
+import UserBus from "./CurrentClickedUserBus";
 export default {
-  props: {
-    currentUser: {
-      type: Object,
-      required: true,
-    },
+  data() {
+    return {
+      currentUser: null,
+    };
+  },
+  created() {
+    UserBus.onUserSelected((cUser) => {
+      this.currentUser = cUser;
+    });
   },
 };
-
-// console.log(this.currentUser);
 </script>
 
 <style>

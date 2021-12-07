@@ -8,7 +8,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id" @click="userHasSelected(user)">
+        <tr v-for="user in users" :key="user.id" @click="setCurrentUser(user)">
           <td>{{ user.id }}</td>
           <td>{{ user.userName }}</td>
         </tr>
@@ -18,13 +18,18 @@
 </template>
 
 <script>
+import usersMock from "@/mock/usersMock.js";
+import UserBus from "./CurrentClickedUserBus";
 export default {
-  props: {
-    users: {
-      type: Array,
-      required: true,
+  data() {
+    return {
+      users: usersMock,
+    };
+  },
+  methods: {
+    setCurrentUser(cUser) {
+      UserBus.setCurrentUser(cUser);
     },
-    userHasSelected: Function,
   },
 };
 </script>
